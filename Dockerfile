@@ -8,9 +8,9 @@ RUN mkdir -p /opt/build
 COPY gateway /opt/build
 RUN cd /opt/build && export GO111MODULE=on && go build
 
-FROM hyperledger/fabric-peer:latest
+FROM alpine
 MAINTAINER Tong Li <litong01@us.ibm.com>
-RUN mkdir /cmcc && mkdir /www
+RUN mkdir /cmcc && mkdir /www && apk add --no-cache libc6-compat
 COPY --from=build /opt/build/gateway /usr/local/bin/gateway
 COPY www /www
 ENV HOME=/cmcc \
