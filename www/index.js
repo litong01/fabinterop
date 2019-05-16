@@ -58,6 +58,7 @@ function websocketConnect() {
     const ws = new WebSocket(`ws://${url}chaincode/events`);
     ws.onopen = function () {
         console.log("Connection open.");
+        $("#channelName").text("Channel: "+channel);
     }
     ws.onmessage = function (data) {
         const evt = JSON.parse(data.data);
